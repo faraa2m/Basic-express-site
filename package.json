@@ -2,13 +2,16 @@
   "name": "2",
   "version": "1.0.0",
   "description": "A computer repair website",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jade": "*",
+    "nodemailer": "^4.0.1"
   }
 }
