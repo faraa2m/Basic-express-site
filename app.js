@@ -25,7 +25,32 @@ app.get('/contact', (req, res) => {
 });
 
 app.post('/contact/send', (req, res) => {
-    console.log('res');
+    let transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'mohdfaraaz1@gmail.com',
+            pass: ''
+        }
+    });
+
+    var mainOptions = {
+        from: 'Faraaz <mohdfaraaz1@gmail.com>',
+        to: 'faraazuddin.md@gmail.com',
+        subject: 'Website Submission',
+        text: `You submitted a form on the test server. Name: ${req.body.name} Email: ${req.body.email} Message: ${req.body.message}`,
+        html:  `<p>You submitted a form on the test server.<\p><ul><li>Name: ${req.body.name}</li><li>Email: ${req.body.email}</li><li>Message: ${req.body.message}</li></ul>`
+    }
+
+    transporter.sendMail(mainOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.redirect('/');
+            return;
+        }
+
+        console.log(`Message ${info.response}`);
+        res.redirect('/');
+    })
 })
 
 app.listen(3000);
